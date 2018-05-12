@@ -24,24 +24,24 @@
 							class="am-icon-check"></span> 个人资料</a></li>
 					<li><a href="help.jsp"><span class="am-icon-puzzle-piece"></span>
 							帮助页</a></li>
-					<li><a href="admin-gallery.html"><span class="am-icon-th"></span>
+					<!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span>
 							相册页面<span
 							class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
 					<li><a href="admin-log.html"><span
 							class="am-icon-calendar"></span> 系统日志</a></li>
 					<li><a href="admin-404.html"><span class="am-icon-bug"></span>
-							404</a></li>
+							404</a></li> -->
 				</ul></li>
 
 
 
 
 			<li class="admin-parent"><a class="am-cf"
-				data-am-collapse="{target: '#collapse-nav'}"><span
+				data-am-collapse="{target: '#collapse-nav1'}"><span
 					class="am-icon-file"></span> Library（库） <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
-					id="collapse-nav">
+					id="collapse-nav1">
 					<li><a href="allDocuments.jsp" class="am-cf"><span
 							class="am-icon-file-text"></span> All Documents</a></li>
 					<li><a href="favorites.jsp"><span class="am-icon-star"></span>
@@ -60,8 +60,8 @@
 									pstmt.setInt(1, user.getId());
 									ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
 								%>
-				<li class="admin-parent"><a onclick=javascript:addFolder() class="am-cf"
-				data-am-collapse="{target: '#collapse-nav'}" title="新增文件夹"><span
+				<li class="admin-parent"><a class="am-cf"
+				data-am-collapse="{target: '#addFolder'}" title="新增文件夹"><span
 					class="am-icon-file"></span> Folder <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
@@ -74,7 +74,20 @@
 					<%
 						}
 					%>
+					<li><a onclick=javascript:addFolder() class="am-cf" title="点此新建文件夹"><span
+							class="am-icon-pencil-square-o"></span>new</a></li>
 				</ul></li>
+				
+				<li class="admin-parent"><a class="am-cf"
+				data-am-collapse="{target: '#collapse-nav2'}"><span
+					class="am-icon-file"></span> Community <span
+					class="am-icon-angle-right am-fr am-margin-right"></span></a>
+				<ul class="am-list am-collapse admin-sidebar-sub am-in"
+					id="collapse-nav2">
+					<li><a href="forumHome.jsp" class="am-cf"><span
+							class="am-icon-calendar"></span> Forum</a></li>
+				</ul></li>
+				
 								<script type="text/javascript"> 
 							    function addFolder() {  
 							        var name = prompt("请输入文件夹名", "");  
