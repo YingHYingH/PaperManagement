@@ -88,6 +88,10 @@
 		<servlet-name>AddFolderServlet</servlet-name>
 		<servlet-class>com.ssdut.java.AddFolderServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>UploadMyFoldersServlet</servlet-name>
+		<servlet-class>com.ssdut.java.UploadMyFoldersServlet</servlet-class>
+	</servlet>
 
 
 
@@ -170,5 +174,9 @@
 	<servlet-mapping>
 		<servlet-name>AddFolderServlet</servlet-name>
 		<url-pattern>/AddFolderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadMyFoldersServlet</servlet-name>
+		<url-pattern>/UploadMyFoldersServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

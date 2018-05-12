@@ -10,7 +10,11 @@
 	String username = (String) session.getAttribute("username");
 	User user = new UserDao().getUserByUsername(username);
 %>
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	int folderId = Integer.valueOf(request.getParameter("folderId"));//用request得到
+%>
 <html>
 <head>
 <jsp:include page="headerreference.jsp"></jsp:include>
@@ -19,7 +23,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
-
+	<input type="hidden" id="folderId" value=<%=folderId %>>></input>
 	<div class="am-cf admin-main">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- content start -->
@@ -59,7 +63,8 @@
 
 								<script type="text/javascript">
 									function jump() {
-										window.location.href = "addPaperFavorites1.jsp";
+										var folderId = document.getElementById("folderId").value;
+										window.location.href = "addPaperMyFolders.jsp?folderId="+folderId;
 									}
 								</script>
 
@@ -116,11 +121,8 @@
 									Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
 											"0000");//建立连接  
 									//Statement stmt = conn.createStatement();//创建执行者  
-									String sql = "select paper.* from paper,folder_paper where paper.id = folder_paper.paper_id and folder_paper.folder_id=?";
+									String sql = "select paper.* from paper inner join folder_paper on (paper.id=folder_paper.paper_id) where folder_paper.folder_id=?";
 									PreparedStatement pstmt = conn.prepareStatement(sql);
-									String path = request.getContextPath();
-								    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-								    int folderId = Integer.valueOf(request.getParameter("folderId"));//用request得到
 									pstmt.setInt(1, folderId);
 									ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
 								%>
@@ -129,7 +131,7 @@
 									<%
 										int i = 0;
 										while (rs.next()) {
-											if (rs.getInt(13) == 2 || rs.getInt(13) == 0) {
+											if (rs.getInt(13) == 2) {
 												continue;
 											}
 											++i;
@@ -152,12 +154,30 @@
 										<td>
 											<div class="am-btn-toolbar">
 												<div class="am-btn-group am-btn-group-xs">
+													<%
+														if (rs.getInt(13) == 0) {
+													%>
+													<button
+														class="am-btn am-btn-default am-btn-xs am-text-secondary">
+														<span class="am-icon-pencil-square-o"></span><a
+															href="FavoritesServlet?id=<%=rs.getInt(1)%>"> 收藏 
+													</button>
+													<%
+														}
+													%>
+													<%
+														if (rs.getInt(13) == 1) {
+													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
 														<span class="am-icon-pencil-square-o"></span><a
 															href="disFavoritesServlet?id=<%=rs.getInt(1)%>"> 取消收藏
+
 														
 													</button>
+													<%
+														}
+													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
 														<span class="am-icon-download"></span> <a
