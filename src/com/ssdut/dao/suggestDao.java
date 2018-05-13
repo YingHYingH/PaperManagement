@@ -32,7 +32,7 @@ public class suggestDao extends AbstractDao {
 			
 			/*String sql = "select * ,(watches + downloadcnt) as score from paper where classification1 like '%"
 					+ searchKeyword + "%' OR author like '%" + searchKeyword + "%' ORDER BY score desc";*/
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			DbHelper.release(conn);
 			ResultSet rs = pstmt.executeQuery();
 			return rs;

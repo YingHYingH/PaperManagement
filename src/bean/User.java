@@ -88,4 +88,67 @@ public class User {
 		this.intro = intro;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((academicstatus == null) ? 0 : academicstatus.hashCode());
+		result = prime * result + ((discipline == null) ? 0 : discipline.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((intro == null) ? 0 : intro.hashCode());
+		result = prime * result + ((psw == null) ? 0 : psw.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (academicstatus == null) {
+			if (other.academicstatus != null)
+				return false;
+		} else if (!academicstatus.equals(other.academicstatus))
+			return false;
+		if (discipline == null) {
+			if (other.discipline != null)
+				return false;
+		} else if (!discipline.equals(other.discipline))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (intro == null) {
+			if (other.intro != null)
+				return false;
+		} else if (!intro.equals(other.intro))
+			return false;
+		if (psw == null) {
+			if (other.psw != null)
+				return false;
+		} else if (!psw.equals(other.psw))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	
+
 }
