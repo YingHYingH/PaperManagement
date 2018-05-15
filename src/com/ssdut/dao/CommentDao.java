@@ -1,6 +1,7 @@
 package com.ssdut.dao;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 
 import bean.Comment;
 import dbhelper.DbHelper;
@@ -12,10 +13,12 @@ public class CommentDao extends AbstractDao{
 	
 	public boolean addComment(Comment comment) throws Exception {
 		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String time = sdf.format(comment.getTime());
 			Connection conn = helper.getConnection();
 			String sql = "insert into comment(discuss_id,content,time,user_id) values(?,?,?,?)";
 			QueryRunner query = new QueryRunner();
-			Object[] params = { comment.getDiscuss_id(),comment.getContent(),comment.getTime(),comment.getUser_id()};
+			Object[] params = { comment.getDiscuss_id(),comment.getContent(),time,comment.getUser_id()};
 			query.update(conn, sql, params);
 			DbHelper.release(conn);
 			// return paper != null ? paper : null;

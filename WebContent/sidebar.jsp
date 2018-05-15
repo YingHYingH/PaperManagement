@@ -43,7 +43,7 @@
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="collapse-nav1">
 					<li><a href="allDocuments.jsp" class="am-cf"><span
-							class="am-icon-file-text"></span> All Documents</a></li>
+							class="am-icon-file-text"></span> My Home Page</a></li>
 					<li><a href="favorites.jsp"><span class="am-icon-star"></span>
 							Favorites</a></li>
 					<li><a href="recentlyAdded.jsp"><span class="am-icon-star"></span>

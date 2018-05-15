@@ -5,6 +5,7 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>PaperManagement</display-name>
 	<welcome-file-list>
+		<welcome-file>landing.jsp</welcome-file>  
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
@@ -104,7 +105,10 @@
 		<servlet-name>CancelLikeServlet</servlet-name>
 		<servlet-class>com.ssdut.java.CancelLikeServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>AddCommentServlet</servlet-name>
+		<servlet-class>com.ssdut.java.AddCommentServlet</servlet-class>
+	</servlet>
 
 
 
@@ -201,5 +205,9 @@
 	<servlet-mapping>
 		<servlet-name>CancelLikeServlet</servlet-name>
 		<url-pattern>/CancelLikeServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddCommentServlet</servlet-name>
+		<url-pattern>/AddCommentServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -144,7 +144,7 @@
 			while (rs.next())
 				count++;
 			lastPage = (int) Math.ceil((double) count / MaxNum);
-			if (pageNO == 0)
+			if (pageNO <= 0)
 				pageNO = 1;
 			if (lastPage == 0)
 				lastPage = 1;
@@ -303,7 +303,7 @@
 					</td>
 					<td>
 						输入页次：
-						<input type=text id=pageNum size=3 name=pageNO value=1>
+						<input type=text id=pageNum size=3 name=pageNO value=<%=pageNO %>>
 					</td>
 					<td>
 						<button onclick="surePageNO()">转到</button>

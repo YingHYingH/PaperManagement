@@ -143,7 +143,7 @@
 									while (rs.next())
 										count++;
 									lastPage = (int) Math.ceil((double) count / MaxNum);
-									if (pageNO == 0)
+									if (pageNO <= 0)
 										pageNO = 1;
 									if (lastPage == 0)
 										lastPage = 1;
@@ -181,7 +181,7 @@
 									<tr>
 										<td width="8% " style="word-break: break-all;"><%=i%></td>
 										<td width="20% " style="word-break: break-all;" title="点击查看详情"><a
-											href="paperInfo.jsp?id=<%=rs.getInt(1)%>"><%=rs.getString(2)%></a></td>
+											href="discussDetail.jsp?discuss_id=<%=rs.getInt(1)%>"><%=rs.getString(2)%></a></td>
 										<td width="10% " style="word-break: break-all;"><%=discussUsername%></td>
 										<td width="10% " style="word-break: break-all;"><%=rs.getInt(6)%></td>
 										<td width="8% " style="word-break: break-all;"
@@ -219,7 +219,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
 														<span class="am-icon-pencil-square-o"></span><a
-															href="DeleteServlet?id=<%=rs.getInt(1)%>"> 评论 
+															href="discussDetail.jsp?discuss_id=<%=rs.getInt(1)%>"> 评论 
 													</button>
 
 													<button
@@ -293,7 +293,7 @@
 							<td><a href=myForumHome.jsp?pageNO=<%=lastPage%>>【最后一页】</a>
 							</td>
 							<td>输入页次： <input type=text id=pageNum size=3 name=pageNO
-								value=1>
+								value=<%=pageNO %>>
 							</td>
 							<td>
 								<button onclick="surePageNO()">转到</button>

@@ -19,7 +19,9 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
-
+	<%
+	String authorUsername = request.getParameter("authorUsername");
+	%>
 	<div class="am-cf admin-main">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- content start -->
@@ -27,8 +29,20 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">我的主页</strong> / <small>My Home Page</small>
+						<strong class="am-text-primary am-text-lg"><%=authorUsername %>的主页</strong> / <small><%=authorUsername %>'s Home Page</small>
 					</div>
+					<div class="am-g">
+					<div class="am-u-sm-12 am-u-md-9">
+						<div class="am-btn-toolbar">
+							<div class="am-btn-group am-btn-group-xs">
+								<button type="button" class="am-btn am-btn-default"
+									value="uploadindex" onclick=javascript:jump()>
+									<span class="am-icon-plus"></span> Follow
+							</div>
+						</div>
+					</div>
+					</div>		
+					</button>
 				</div>
 
 				<hr>
@@ -59,10 +73,10 @@
 
 
 
-								<button type="button" class="am-btn am-btn-default"
+								<!-- <button type="button" class="am-btn am-btn-default"
 									value="uploadindex" onclick=javascript:jump()>
 									<span class="am-icon-plus"></span> 新增
-								</button>
+								</button> -->
 								<!-- <button type="button" class="am-btn am-btn-default">
 								<span class="am-icon-save"></span> 保存
 							</button>
@@ -78,7 +92,7 @@
 
 
 
-					<form action="searchServlet" class="fh5co-form animate-box"
+					<%-- <form action="searchServlet" class="fh5co-form animate-box"
 						data-animate-effect="fadeIn" method="post">
 						<input type="hidden" name="user_id" value="<%=user.getId()%>">
 						<div class="am-u-sm-12 am-u-md-3">
@@ -89,7 +103,7 @@
 								</span>
 							</div>
 						</div>
-					</form>
+					</form> --%>
 				</div>
 
 
@@ -113,6 +127,7 @@
 									</tr>
 								</thead>
 								<%
+									Integer authorUserId = new UserDao().getUserByUsername(authorUsername).getId();
 									Class.forName("com.mysql.jdbc.Driver");//加载驱动  
 									Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
 											"0000");//建立连接  
@@ -120,16 +135,9 @@
 									String sql = "select * from paper where user_id=?";
 									PreparedStatement pstmt = conn.prepareStatement(sql);
 
-									pstmt.setInt(1, user.getId());
+									pstmt.setInt(1, authorUserId);
 									ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
 								%>
-
-
-
-
-
-
-
 
 								<tbody>
 									<%
@@ -158,7 +166,7 @@
 										<td>
 											<div class="am-btn-toolbar">
 												<div class="am-btn-group am-btn-group-xs">
-													<%
+												<%-- 	<%
 														if (rs.getInt(13) == 0) {
 													%>
 													<button
@@ -181,7 +189,7 @@
 													</button>
 													<%
 														}
-													%>
+													%> --%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
 														<span class="am-icon-download"></span> <a
@@ -190,11 +198,11 @@
 
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-														<span class="am-icon-trash-o"></span><a
-															href="DeleteServlet?id=<%=rs.getInt(1)%>"> 删除 
+														<span class="am-icon-plus"></span><a
+															href="DeleteServlet?id=<%=rs.getInt(1)%>"> Add to My Page 
 													</button>
 
-													<%
+												<%-- 	<%
 														if (rs.getInt(17) == 0) {
 													%>
 													<button
@@ -215,7 +223,7 @@
 													</button>
 													<%
 														}
-													%>
+													%> --%>
 
 
 
