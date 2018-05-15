@@ -123,7 +123,7 @@
 									</tr>
 								</thead>
 								<%
-									int MaxNum = 10;//每页容纳的主题论文的最大数目
+									int MaxNum = 6;//每页容纳的主题论文的最大数目
 									int count = 0, firstPage = 1, lastPage, firstNum, lastNum, prePage, nextPage, pageNO;
 									//firstPage表示首页，lastPage表示末页，pageNO表示第几页，
 									//firstNum表示该页的起始贴的ID，lastNum表示该页的末帖的ID，
@@ -159,7 +159,10 @@
 										nextPage = pageNO;
 									else
 										nextPage = pageNO + 1;
-									sql = "select * from (select * from discuss where user_id=? order by time desc) A limit " + firstNum + "," + MaxNum;
+									sql = "select d.*,(select count(*) from likes l where l.discuss_id = d.discuss_id),"
+											+ "(select count(*) from comment c where c.discuss_id = d.discuss_id),"
+											+ "(select count(*) from likes l where l.discuss_id = d.discuss_id and l.user_id="+user.getId()+")"
+											+ "from (select * from discuss where user_id=? order by time desc) d limit " + firstNum + "," + MaxNum;
 									System.out.println(sql);
 									pstmt = conn.prepareStatement(sql);
 									pstmt.setInt(1, user.getId());
@@ -180,32 +183,34 @@
 										<td width="20% " style="word-break: break-all;" title="点击查看详情"><a
 											href="paperInfo.jsp?id=<%=rs.getInt(1)%>"><%=rs.getString(2)%></a></td>
 										<td width="10% " style="word-break: break-all;"><%=discussUsername%></td>
-										<td width="10% " style="word-break: break-all;">0</td>
+										<td width="10% " style="word-break: break-all;"><%=rs.getInt(6)%></td>
 										<td width="8% " style="word-break: break-all;"
-											class="am-hide-sm-only">0</td>
+											class="am-hide-sm-only"><%=rs.getInt(7)%></td>
 										<td width="20% " style="word-break: break-all;"
 											class="am-hide-sm-only"><%=rs.getString(4).substring(0,rs.getString(4).length()-2)%></td>
 										<td>
 											<div class="am-btn-toolbar">
 												<div class="am-btn-group am-btn-group-xs">
 													<%
-														if (rs.getInt(1) == 0) {
+														if (rs.getInt(8) == 0) {
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-pencil-square-o"></span><a
-															href="FavoritesServlet?id=<%=rs.getInt(1)%>"> 赞 
+														<span class="am-icon-heart-o"></span><a
+															href=# onclick=javascript:addLike(<%=rs.getInt(1) %>)> 赞一个
 													</button>
 													<%
 														}
 													%>
 													<%
-														if (rs.getInt(1) != 0) {
+														if (rs.getInt(8) != 0) {
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-star"></span><a
-															href="disFavoritesServlet?id=<%=rs.getInt(1)%>"> 取消赞
+														<span class="am-icon-heart"></span><a
+															href=# onclick=javascript:cancelLike(<%=rs.getInt(1) %>)> 取消赞
+
+														
 													</button>
 													<%
 														}
@@ -244,6 +249,30 @@
 			function surePageNO() {
 				var num = $("#pageNum").val();
 				window.location.href = "myForumHome.jsp?pageNO="+num;
+			}
+			function addLike(discussId){
+				var user_id = document.getElementById("user_id").value;
+        		//新建页面请求对象
+				var req = new XMLHttpRequest();
+				//设置传送方式，对应的servlet或action路径，是否异步处理
+		        req.open("POST", "AddLikeServlet", true);
+		        //如果设置数据传送方式为post，则必须设置请求头信息
+		        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				var value ="user_id=" +user_id + "&discussId=" + discussId;
+				req.send(value);
+				location.reload(); 
+			}
+			function cancelLike(discussId){
+				var user_id = document.getElementById("user_id").value;
+        		//新建页面请求对象
+				var req = new XMLHttpRequest();
+				//设置传送方式，对应的servlet或action路径，是否异步处理
+		        req.open("POST", "CancelLikeServlet", true);
+		        //如果设置数据传送方式为post，则必须设置请求头信息
+		        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				var value ="user_id=" +user_id + "&discussId=" + discussId;
+				req.send(value);
+				location.reload(); 
 			}
 		</script>
 

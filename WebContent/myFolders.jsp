@@ -159,7 +159,7 @@
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-pencil-square-o"></span><a
+														<span class="am-icon-star-o"></span><a
 															href="FavoritesServlet?id=<%=rs.getInt(1)%>"> 收藏 
 													</button>
 													<%
@@ -170,7 +170,7 @@
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-pencil-square-o"></span><a
+														<span class="am-icon-star"></span><a
 															href="disFavoritesServlet?id=<%=rs.getInt(1)%>"> 取消收藏
 
 														

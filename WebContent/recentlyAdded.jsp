@@ -163,7 +163,7 @@
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-pencil-square-o"></span><a
+														<span class="am-icon-star-o"></span><a
 															href="FavoritesServlet?id=<%=rs.getInt(1)%>"> 收藏 
 													</button>
 													<%
@@ -174,7 +174,7 @@
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
-														<span class="am-icon-pencil-square-o"></span><a
+														<span class="am-icon-star"></span><a
 															href="disFavoritesServlet?id=<%=rs.getInt(1)%>"> 取消收藏
 
 
@@ -205,7 +205,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-trash-o"></span>未读
+														<span class="am-icon-circle"></span>未读
 													</button>
 													<%
 														}
@@ -216,7 +216,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-trash-o"></span>已读
+														<span class="am-icon-circle-o"></span>已读
 													</button>
 													<%
 														}

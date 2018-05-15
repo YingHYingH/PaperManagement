@@ -96,6 +96,14 @@
 		<servlet-name>AddDiscussServlet</servlet-name>
 		<servlet-class>com.ssdut.java.AddDiscussServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddLikeServlet</servlet-name>
+		<servlet-class>com.ssdut.java.AddLikeServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CancelLikeServlet</servlet-name>
+		<servlet-class>com.ssdut.java.CancelLikeServlet</servlet-class>
+	</servlet>
 
 
 
@@ -185,5 +193,13 @@
 	<servlet-mapping>
 		<servlet-name>AddDiscussServlet</servlet-name>
 		<url-pattern>/AddDiscussServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddLikeServlet</servlet-name>
+		<url-pattern>/AddLikeServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CancelLikeServlet</servlet-name>
+		<url-pattern>/CancelLikeServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
