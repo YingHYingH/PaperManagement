@@ -31,6 +31,15 @@ public class addPaperDao extends AbstractDao {
 		}
 	}
 	
+	public boolean addToMyPage(Paper paper) throws Exception {
+		try {
+			return new PaperDao().addToMyPage(paper) == true ? true : false;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("获取Paper信息！" + e);
+		}
+	}
+	
 	public boolean updatePaper(Paper paper,int user_id) throws Exception {
 		try {
 			return new PaperDao().updatePaper(paper,user_id) == true ? true : false;

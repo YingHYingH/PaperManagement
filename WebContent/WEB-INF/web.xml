@@ -109,8 +109,14 @@
 		<servlet-name>AddCommentServlet</servlet-name>
 		<servlet-class>com.ssdut.java.AddCommentServlet</servlet-class>
 	</servlet>
-
-
+	<servlet>
+		<servlet-name>FollowUserServlet</servlet-name>
+		<servlet-class>com.ssdut.java.FollowUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddToMyPageServlet</servlet-name>
+		<servlet-class>com.ssdut.java.AddToMyPageServlet</servlet-class>
+	</servlet>
 
 
 
@@ -209,5 +215,13 @@
 	<servlet-mapping>
 		<servlet-name>AddCommentServlet</servlet-name>
 		<url-pattern>/AddCommentServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FollowUserServlet</servlet-name>
+		<url-pattern>/FollowUserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddToMyPageServlet</servlet-name>
+		<url-pattern>/AddToMyPageServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

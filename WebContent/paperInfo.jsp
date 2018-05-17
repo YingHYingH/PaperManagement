@@ -16,6 +16,8 @@
 	Paper paper = dao.getPaperById(id);
 	dao.increWatches(id);
 	String url = paper.getUrl();
+	int index = url.indexOf(".pdf");
+	url = url.substring(0, index+4);
 %>
 
 <html>

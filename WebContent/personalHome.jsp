@@ -21,6 +21,8 @@
 
 	<%
 	String authorUsername = request.getParameter("authorUsername");
+	String allFollowUser = new UserDao().getUserById(user.getId()).getFollowed();
+	int isFollow = allFollowUser.indexOf(authorUsername);
 	%>
 	<div class="am-cf admin-main">
 		<jsp:include page="sidebar.jsp"></jsp:include>
@@ -31,18 +33,37 @@
 					<div class="am-fl am-cf">
 						<strong class="am-text-primary am-text-lg"><%=authorUsername %>的主页</strong> / <small><%=authorUsername %>'s Home Page</small>
 					</div>
+					<input type=hidden id="authorUsername" value="<%=authorUsername %>"></input>
+					<input type=hidden id="user_id" value="<%=user.getId() %>"></input>
 					<div class="am-g">
 					<div class="am-u-sm-12 am-u-md-9">
 						<div class="am-btn-toolbar">
 							<div class="am-btn-group am-btn-group-xs">
+								<%
+									if(isFollow<0){
+								%>
 								<button type="button" class="am-btn am-btn-default"
-									value="uploadindex" onclick=javascript:jump()>
+									value="uploadindex" onclick=javascript:follow(1)>
 									<span class="am-icon-plus"></span> Follow
+							    </button>
+							    <%
+									}
+							    %>
+							    
+							    <%
+									if(isFollow>=0){
+								%>
+								<button type="button" class="am-btn am-btn-default"
+									value="uploadindex" onclick=javascript:follow(0)>
+									<span class="am-icon-minus"></span> Unfollow
+							    </button>
+							    <%
+									}
+							    %>
 							</div>
 						</div>
 					</div>
 					</div>		
-					</button>
 				</div>
 
 				<hr>
@@ -55,18 +76,29 @@
 
 
 								<script type="text/javascript">
-									function jump() {
-										window.location.href = "addPaper3.jsp";
+									function follow(flag){
+										var authorUsername = $("#authorUsername").val();
+						        		var user_id = document.getElementById("user_id").value;
+						        		//新建页面请求对象
+										var req = new XMLHttpRequest();
+										//设置传送方式，对应的servlet或action路径，是否异步处理
+								        req.open("POST", "FollowUserServlet", true);
+								        //如果设置数据传送方式为post，则必须设置请求头信息
+								        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+										var value ="user_id=" +user_id + "&authorUsername=" + authorUsername +"&flag="+flag;
+										req.send(value);
+										location.reload(); 
 									}
-									function markRead(id){
+									function addToMyPage(paperId,userId){
 										//新建页面请求对象
 										var req = new XMLHttpRequest();
 										//设置传送方式，对应的servlet或action路径，是否异步处理
-								        req.open("POST", "MarkReadServlet", true);
+								        req.open("POST", "AddToMyPageServlet", true);
 								        //如果设置数据传送方式为post，则必须设置请求头信息
 								        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-										var value = "id=" + id;
+										var value = "paperId=" + paperId+"&userId="+userId+"&authorUsername="+authorUsername;
 										req.send(value);
+										location.reload();
 									}
 								</script>
 
@@ -109,7 +141,6 @@
 
 				<div class="am-g">
 					<div class="am-u-sm-12">
-						<form class="am-form">
 							<table
 								class="am-table am-table-striped am-table-hover table-main">
 								<thead>
@@ -138,7 +169,18 @@
 									pstmt.setInt(1, authorUserId);
 									ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
 								%>
-
+								<%
+								sql = "select * from paper where user_id=?";
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setInt(1, user.getId());
+								ResultSet rs1 = pstmt.executeQuery();//返回结果集（游标）
+								String allUrl = "";
+								while(rs1.next()){
+									if (rs1.getInt(13) != 2) {
+										allUrl += rs1.getString(11);
+									}
+								}
+								%>
 								<tbody>
 									<%
 										int i = 0;
@@ -195,13 +237,20 @@
 														<span class="am-icon-download"></span> <a
 															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>">下载</a>
 													</button>
-
+													<%
+													String hereUrl = rs.getString(11);
+													int index = hereUrl.indexOf(".pdf");
+													hereUrl = hereUrl.substring(0, index+4);
+													if(!allUrl.contains(hereUrl)){
+													%>
 													<button
+														onclick=javascript:addToMyPage(<%=rs.getInt(1)%>,<%=user.getId()%>)
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-														<span class="am-icon-plus"></span><a
-															href="DeleteServlet?id=<%=rs.getInt(1)%>"> Add to My Page 
+														<span class="am-icon-plus"></span>Add to My Page 
 													</button>
-
+													<%
+													}
+													%>
 												<%-- 	<%
 														if (rs.getInt(17) == 0) {
 													%>
@@ -243,7 +292,6 @@
 								共<%=i%>条记录
 							</div>
 							<hr />
-						</form>
 					</div>
 
 				</div>

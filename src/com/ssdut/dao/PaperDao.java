@@ -75,6 +75,23 @@ public class PaperDao extends AbstractDao {
 			throw new Exception("添加论文！" + e);
 		}
 	}
+	
+	public boolean addToMyPage(Paper paper) throws Exception {
+		try {
+			Connection conn = helper.getConnection();
+			String sql = "insert into paper(title,author,DOI,classification1,classification2,classification3,abs,pubDate, uploadDate,url,user_id,flag,notes,ifRead) values(?,?,?,'','','',?,?,?,?,?,0,'',0)";
+			QueryRunner query = new QueryRunner();
+			Object[] params = { paper.getTitle(),paper.getAuthor(),paper.getDOI(),paper.getAbs(),paper.getPubDate(),paper.getUploadDate(), paper.getUrl(),paper.getUser_id() };
+			query.update(conn, sql, params);
+			DbHelper.release(conn);
+			// return paper != null ? paper : null;
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("添加论文！" + e);
+		}
+	}
+
 
 	public boolean updatePaper(Paper paper, int user_id) throws Exception {
 		try {

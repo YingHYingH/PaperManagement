@@ -60,7 +60,22 @@
 						
 					%>
 					<div style="padding-left:20px">
-							<span style="font-size:30px"><%=rs.getString(2) %> </span>发帖人:<a href="personalHome.jsp?authorUsername=<%=rs.getString(6) %>" title="点击进入用户主页"><%=rs.getString(6)%></a>&nbsp;发帖时间:<%=rs.getString(4).substring(0, rs.getString(4).length()-2) %>
+							<span style="font-size:30px"><%=rs.getString(2) %> </span>发帖人:
+							<%
+							if(!username.equals(rs.getString(6))){
+							%>
+							<a href="personalHome.jsp?authorUsername=<%=rs.getString(6) %>" title="点击进入用户主页">
+							<%
+							}
+							%>
+							<%
+							if(username.equals(rs.getString(6))){
+							%>
+							<a href="allDocuments.jsp" title="点击进入用户主页">
+							<%
+							}
+							%>
+							<%=rs.getString(6)%></a>&nbsp;发帖时间:<%=rs.getString(4).substring(0, rs.getString(4).length()-2) %>
 										<button type="button" class="am-btn am-btn-default" style="float:right;"
 											value="uploadindex" onclick=javascript:openUserAddDialog()>
 											<span class="am-icon-pencil-square-o"></span> 发表评论
@@ -116,7 +131,12 @@
     								int i = firstNum;
     								 while(rs.next()){
     									 i++;
-    									 String title= "第"+i+"楼"+" 来自:<a href='personalHome.jsp?authorUsername="+rs.getString(6)+"' title='点击进入用户主页'>"+rs.getString(6)+"</a> 时间:"+rs.getString(4).substring(0, rs.getString(4).length()-2);
+    									 String title="";
+    									 if(username.equals(rs.getString(6))){
+    										 title= "第"+i+"楼"+" 来自:<a href='allDocuments.jsp' title='点击进入用户主页'>"+rs.getString(6)+"</a> 时间:"+rs.getString(4).substring(0, rs.getString(4).length()-2);
+    									 }else{
+    										 title= "第"+i+"楼"+" 来自:<a href='personalHome.jsp?authorUsername="+rs.getString(6)+"' title='点击进入用户主页'>"+rs.getString(6)+"</a> 时间:"+rs.getString(4).substring(0, rs.getString(4).length()-2);
+    									 }
     								%>
     								<div class="easyui-panel" title="<%=title %>" style="width:950px;height:120px;padding-left:10px;padding-right:5px;" data-options="footer:'#ft'">
     								<%=rs.getString(3) %></div>

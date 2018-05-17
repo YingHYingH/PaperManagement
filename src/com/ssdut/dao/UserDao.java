@@ -78,4 +78,19 @@ public class UserDao extends AbstractDao {
 		ArrayList<User> users = userDao.getAllUsers();
 		System.out.println(users);
 	}
+	
+	public void addFollowed(User user) {
+		try {
+		String followed = user.getFollowed();
+		int userId = user.getId();
+		Connection conn = helper.getConnection();
+		String sql = "update user set followed=? where id=?";
+		QueryRunner query = new QueryRunner();
+		Object[] params = { followed,userId };
+		query.update(conn, sql, params);
+		DbHelper.release(conn);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 }

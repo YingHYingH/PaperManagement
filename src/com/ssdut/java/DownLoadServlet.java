@@ -16,6 +16,8 @@ public class DownLoadServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 得到要下载的文件名
 		String url = (String) request.getParameter("url");
+		int index = url.indexOf(".pdf");
+		url = url.substring(0, index+4);
 		int id = (Integer.parseInt(request.getParameter("id")));
 		System.out.println(id);
 		PaperDao dao = new PaperDao();
