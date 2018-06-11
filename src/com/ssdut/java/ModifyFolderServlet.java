@@ -11,7 +11,7 @@ import com.ssdut.dao.FolderDao;
 
 import bean.Folder;
 
-public class AddFolderServlet extends HttpServlet {
+public class ModifyFolderServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, UnsupportedEncodingException{
 		//设置数据编码方式
@@ -24,16 +24,13 @@ public class AddFolderServlet extends HttpServlet {
 		//获取从页面传递的参数
 		//System.out.println("233");
         String title = request.getParameter("name");
-        String userId = request.getParameter("userId");
+        String folderId = request.getParameter("folderId");
         /*
         * 执行操作
         * */
         try {
-			Folder folder = new Folder();
-			folder.setFolder_title(title);
-			folder.setUser_id(Integer.valueOf(userId));
 			FolderDao folderDao = new FolderDao();
-			folderDao.addFolder(folder);
+			folderDao.modifyFolderTitle(Integer.valueOf(folderId),title);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

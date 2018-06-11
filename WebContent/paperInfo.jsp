@@ -234,8 +234,14 @@
 					</div>
 					<%
 						} else {
+							String pdfurl = url;
+							pdfurl = pdfurl.substring(40);
+							pdfurl = "../.." + pdfurl;
 					%>
 					<div class="am-margin" align="center">
+					<a href="pdf/web/viewer.html?file=<%=pdfurl%>" target="myframe"><input
+							type="button" value="在线预览"
+							class="am-btn am-btn-primary am-topbar-btn am-btn-sm"></a>
 						<a
 							href="DownLoadServlet?url=<%=paper.getUrl()%>&id=<%=paper.getId()%>"><input
 							type="button" value="下载"

@@ -191,7 +191,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
 														<span class="am-icon-download"></span> <a
-															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>">下载</a>
+															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>"> 下载</a>
 													</button>
 
 													<button
@@ -205,7 +205,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-circle"></span>未读
+														<span class="am-icon-circle"></span> 未读
 													</button>
 													<%
 														}
@@ -216,7 +216,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-circle-o"></span>已读
+														<span class="am-icon-circle-o"></span> 已读
 													</button>
 													<%
 														}

@@ -13,6 +13,7 @@ public class CommentDao extends AbstractDao{
 	
 	public boolean addComment(Comment comment) throws Exception {
 		try {
+			//新增评论
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = sdf.format(comment.getTime());
 			Connection conn = helper.getConnection();
@@ -21,7 +22,9 @@ public class CommentDao extends AbstractDao{
 			Object[] params = { comment.getDiscuss_id(),comment.getContent(),time,comment.getUser_id()};
 			query.update(conn, sql, params);
 			DbHelper.release(conn);
-			// return paper != null ? paper : null;
+			//新增评论对应消息
+			MessageDao messageDao = new MessageDao();
+			messageDao.addMessageWithComment(comment);
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

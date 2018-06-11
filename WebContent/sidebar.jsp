@@ -8,22 +8,23 @@
 	String username = (String) session.getAttribute("username");
 	User user = new UserDao().getUserByUsername(username);
 %>
+
 <!-- sidebar start -->
 <input  type="hidden"  id="userId" value="<%=user.getId()%>"></input>
 <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
 	<div class="am-offcanvas-bar admin-offcanvas-bar">
 		<ul class="am-list admin-sidebar-list">
-			<li><a href="home.jsp"><span class="am-icon-home"></span> 首页</a></li>
+			<li><a href="home.jsp"><span class="am-icon-home"></span> 我的主页</a></li>
 			<li class="admin-parent"><a class="am-cf"
 				data-am-collapse="{target: '#collapse-nav'}"><span
-					class="am-icon-file"></span> 页面模块 <span
+					class="am-icon-file"></span> 个人管理 <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="collapse-nav">
 					<li><a href="personalInfo.jsp" class="am-cf"><span
 							class="am-icon-check"></span> 个人资料</a></li>
-					<li><a href="help.jsp"><span class="am-icon-puzzle-piece"></span>
-							帮助页</a></li>
+					<!-- <li><a href="help.jsp"><span class="am-icon-puzzle-piece"></span>
+							帮助页</a></li> -->
 					<!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span>
 							相册页面<span
 							class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
@@ -54,7 +55,7 @@
 									Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
 											"0000");//建立连接  
 									//Statement stmt = conn.createStatement();//创建执行者  
-									String sql = "select * from folder where user_id=?";
+									String sql = "select * from folder where user_id=? and flag=1";
 									PreparedStatement pstmt = conn.prepareStatement(sql);
 
 									pstmt.setInt(1, user.getId());
@@ -112,7 +113,7 @@
 					Library（库）</a></li> -->
 			<li><a href="suggest.jsp"><span
 					class="am-icon-pencil-square-o"></span> Suggest（推荐）</a></li>
-			<li><a href="exit.jsp"><span class="am-icon-sign-out"></span>
+			<li><a href="login.jsp"><span class="am-icon-sign-out"></span>
 					注销</a></li>
 		</ul>
 

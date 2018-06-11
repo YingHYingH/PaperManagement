@@ -5,6 +5,7 @@ public class Folder {
 	private int folder_id;
 	private String folder_title;
 	private int user_id;
+	private int flag;
 	public int getFolder_id() {
 		return folder_id;
 	}
@@ -23,10 +24,18 @@ public class Folder {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+	
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + flag;
 		result = prime * result + folder_id;
 		result = prime * result + ((folder_title == null) ? 0 : folder_title.hashCode());
 		result = prime * result + user_id;
@@ -41,6 +50,8 @@ public class Folder {
 		if (getClass() != obj.getClass())
 			return false;
 		Folder other = (Folder) obj;
+		if (flag != other.flag)
+			return false;
 		if (folder_id != other.folder_id)
 			return false;
 		if (folder_title == null) {
@@ -54,7 +65,7 @@ public class Folder {
 	}
 	@Override
 	public String toString() {
-		return "Folder [folder_id=" + folder_id + ", folder_title=" + folder_title + ", user_id=" + user_id + "]";
+		return "Folder [folder_id=" + folder_id + ", folder_title=" + folder_title + ", user_id=" + user_id + ", flag="
+				+ flag + "]";
 	}
-	
 }

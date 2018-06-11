@@ -20,21 +20,21 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small>
+						<strong class="am-text-primary am-text-lg">我的主页</strong> / <small>My Home Page</small>
 					</div>
 				</div>
 
-				<!-- <ul
+				<ul
 					class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
 					<li><a href="#" class="am-text-success"><span
-							class="am-icon-btn am-icon-file-text"></span><br />新增页面<br />2300</a></li>
+							class="am-icon-btn am-icon-file-text"></span><br />我的评论<br />1</a></li>
 					<li><a href="#" class="am-text-warning"><span
-							class="am-icon-btn am-icon-briefcase"></span><br />成交订单<br />308</a></li>
+							class="am-icon-btn am-icon-briefcase"></span><br />我的点赞<br />1</a></li>
 					<li><a href="#" class="am-text-danger"><span
-							class="am-icon-btn am-icon-recycle"></span><br />昨日访问<br />80082</a></li>
+							class="am-icon-btn am-icon-recycle"></span><br />我的访客<br />1</a></li>
 					<li><a href="#" class="am-text-secondary"><span
-							class="am-icon-btn am-icon-user-md"></span><br />在线用户<br />3000</a></li>
-				</ul> -->
+							class="am-icon-btn am-icon-user-md"></span><br />我的粉丝<br />1</a></li>
+				</ul>
 
 				<!-- <div class="am-g">
 					<div class="am-u-sm-12">
@@ -159,9 +159,9 @@
 							</tbody>
 						</table>
 					</div>
-				</div> -->
+				</div>
 
-				<!-- <div class="am-g">
+				<div class="am-g">
 					<div class="am-u-md-6">
 						<div class="am-panel am-panel-default">
 							<div class="am-panel-hd am-cf"
@@ -297,12 +297,12 @@
 									</li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="am-panel am-panel-default">
 							<div class="am-panel-hd am-cf"
 								data-am-collapse="{target: '#collapse-panel-3'}">
-								最近留言<span class="am-icon-chevron-down am-fr"></span>
+								我的消息<span class="am-icon-chevron-down am-fr"></span>
 							</div>
 							<div class="am-panel-bd am-collapse am-in am-cf"
 								id="collapse-panel-3">
@@ -352,24 +352,7 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
-
-
-
-				显示suggest及上传论文
-
-
-
-
-
-
-
-
-
-
-
-
-
+				</div>
 			</div>
 
 			<footer class="admin-content-footer">

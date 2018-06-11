@@ -9,6 +9,7 @@ public class Discuss {
 	private String content;
 	private Date time;
 	private int user_id;
+	private int flag;
 	public int getDiscuss_id() {
 		return discuss_id;
 	}
@@ -39,12 +40,20 @@ public class Discuss {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+	
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + discuss_id;
+		result = prime * result + flag;
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + user_id;
@@ -66,6 +75,8 @@ public class Discuss {
 			return false;
 		if (discuss_id != other.discuss_id)
 			return false;
+		if (flag != other.flag)
+			return false;
 		if (time == null) {
 			if (other.time != null)
 				return false;
@@ -83,8 +94,7 @@ public class Discuss {
 	@Override
 	public String toString() {
 		return "Discuss [discuss_id=" + discuss_id + ", title=" + title + ", content=" + content + ", time=" + time
-				+ ", user_id=" + user_id + "]";
+				+ ", user_id=" + user_id + ", flag=" + flag + "]";
 	}
-	
 	
 }

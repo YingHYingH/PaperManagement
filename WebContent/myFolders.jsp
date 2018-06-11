@@ -5,7 +5,7 @@
 <%@ page import="bean.User"%>
 <%@ page import="com.ssdut.dao.UserDao"%>
 <%@ page import="java.sql.PreparedStatement"%>
-<%@ page import="com.ssdut.dao.UserDao"%>
+<%@ page import="com.ssdut.dao.FolderDao"%>
 <%
 	String username = (String) session.getAttribute("username");
 	User user = new UserDao().getUserByUsername(username);
@@ -14,16 +14,25 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	int folderId = Integer.valueOf(request.getParameter("folderId"));//用request得到
+	String folderTitle = new FolderDao().getFolderById(folderId).getFolder_title();
 %>
 <html>
 <head>
 <jsp:include page="headerreference.jsp"></jsp:include>
 <title>PaperManagement folder myFolders</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/amazeui.min.js"></script>
+<script src="js/app.js"></script>
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="js/easyui/demo/demo.css">
+<script type="text/javascript" src="js/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-
-	<input type="hidden" id="folderId" value=<%=folderId %>>></input>
+	<input type="hidden" id="folderId" value=<%=folderId %>></input>
+	<input type="hidden" id="folderTitle" value=<%=folderTitle %>></input>
 	<div class="am-cf admin-main">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- content start -->
@@ -31,8 +40,10 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">我的文件夹</strong> / <small>My
+						<strong class="am-text-primary am-text-lg"><%=folderTitle %></strong> / <small>My
 							Folders</small>
+						<span class="am-icon-pencil-square-o" onclick=javascript:modifyFolder(<%=folderId %>) title="点击修改文件夹名"></span>
+						<span class="am-icon-trash" onclick=javascript:deleteFolder(<%=folderId %>) title="删除该文件夹"></span>
 					</div>
 				</div>
 
@@ -57,9 +68,43 @@
 										document.getElementById(id).value;
 										req.send(value);
 									}
+									
+						        	function modifyFolder(folderId) {
+						        		    var folderTitle = document.getElementById("folderTitle").value;
+									        var name = prompt("请输入文件夹名",folderTitle);  
+									        if (name)//如果返回的有内容  
+									        {  
+									        	//新建页面请求对象
+												var req = new XMLHttpRequest();
+												//设置传送方式，对应的servlet或action路径，是否异步处理
+										        req.open("POST", "ModifyFolderServlet", true);
+										        //如果设置数据传送方式为post，则必须设置请求头信息
+										        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+												var value = "name=" + name +"&folderId=" +folderId;
+												req.send(value); 
+												setTimeout("location.reload()",50);
+									        }  
+						        	}
+						        	
+						        	function deleteFolder(folderId) {
+						        		//默认只删除文件夹，不删除其中文件
+						        		var flag = 1;
+						        		if(confirm("您确定要删除该文件夹？")){
+						        			if(confirm("删除文件夹的同时是否删除其中文件？")){
+						        				 flag = 0;
+						        			}
+						        			//新建页面请求对象
+											var req = new XMLHttpRequest();
+											//设置传送方式，对应的servlet或action路径，是否异步处理
+									        req.open("POST", "DeleteFolderServlet", true);
+									        //如果设置数据传送方式为post，则必须设置请求头信息
+									        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+											var value = "flag=" + flag +"&folderId=" +folderId;
+											req.send(value);
+											window.location.href="allDocuments.jsp";
+						        		}
+					        	}
 								</script>
-
-
 
 								<script type="text/javascript">
 									function jump() {
@@ -181,7 +226,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
 														<span class="am-icon-download"></span> <a
-															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>">下载</a>
+															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>"> 下载</a>
 													</button>
 
 													<button
@@ -196,7 +241,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-trash-o"></span>未读
+														<span class="am-icon-circle"></span> 未读
 													</button>
 													<%
 														}
@@ -207,7 +252,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-trash-o"></span>已读
+														<span class="am-icon-circle-o"></span> 已读
 													</button>
 													<%
 														}
@@ -280,7 +325,39 @@
 		<!-- content end -->
 
 	</div>
-
+	
+		<div id="dlg" closed="true" class="easyui-dialog" title="Toolbar and Buttons" style="width:400px;height:200px;padding:10px"
+			data-options="
+				iconCls: 'icon-save',
+				toolbar: [{
+					text:'Add',
+					iconCls:'icon-add',
+					handler:function(){
+						alert('add')
+					}
+				},'-',{
+					text:'Save',
+					iconCls:'icon-save',
+					handler:function(){
+						alert('save')
+					}
+				}],
+				buttons: [{
+					text:'Ok',
+					iconCls:'icon-ok',
+					handler:function(){
+						alert('ok');
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						alert('cancel');;
+					}
+				}]
+			">
+		The dialog content.
+	</div>
+	
 	<a href="#"
 		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
 		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>

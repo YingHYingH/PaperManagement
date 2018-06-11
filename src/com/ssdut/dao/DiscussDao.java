@@ -15,7 +15,7 @@ public class DiscussDao extends AbstractDao{
 	public boolean addDiscuss(Discuss discuss) throws Exception {
 		try {
 			Connection conn = helper.getConnection();
-			String sql = "insert into discuss(title,content,time,user_id) values(?,?,?,?)";
+			String sql = "insert into discuss(title,content,time,user_id,flag) values(?,?,?,?,1)";
 			QueryRunner query = new QueryRunner();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	        String date = sdf.format(discuss.getTime());
@@ -39,6 +39,19 @@ public class DiscussDao extends AbstractDao{
 			Discuss discuss = query.query(conn, sql, new BeanHandler<Discuss>(Discuss.class), params);
 			DbHelper.release(conn);
 			return discuss != null ? discuss : null;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("获取帖子信息！" + e);
+		}
+	}
+	public void deleteDiscuss(Integer discussId) throws Exception {
+		try {
+			Connection conn = helper.getConnection();
+			String sql = "update discuss set flag=0 where discuss_id=?";
+			QueryRunner query = new QueryRunner();
+			Object[] params = { discussId };
+		    query.update(conn, sql, params);
+			DbHelper.release(conn);
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception("获取帖子信息！" + e);

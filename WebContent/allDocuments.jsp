@@ -27,7 +27,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">我的主页</strong> / <small>My Home Page</small>
+						<strong class="am-text-primary am-text-lg">所有论文</strong> / <small>All Documents</small>
 					</div>
 				</div>
 
@@ -185,7 +185,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
 														<span class="am-icon-download"></span> <a
-															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>">下载</a>
+															href="DownLoadServlet?url=<%=rs.getString(11)%>&id=<%=rs.getInt(1)%>"> 下载</a>
 													</button>
 
 													<button
@@ -200,7 +200,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-circle"></span>未读
+														<span class="am-icon-circle"></span> 未读
 													</button>
 													<%
 														}
@@ -211,7 +211,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
 														onclick=javascript:markRead(<%=rs.getInt(1)%>) id=<%=rs.getInt(1)%> value=<%=rs.getInt(17)%>>
-														<span class="am-icon-circle-o"></span>已读
+														<span class="am-icon-circle-o"></span> 已读
 													</button>
 													<%
 														}

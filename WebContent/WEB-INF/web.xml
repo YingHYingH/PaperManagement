@@ -117,6 +117,18 @@
 		<servlet-name>AddToMyPageServlet</servlet-name>
 		<servlet-class>com.ssdut.java.AddToMyPageServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>DeleteDiscussServlet</servlet-name>
+		<servlet-class>com.ssdut.java.DeleteDiscussServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyFolderServlet</servlet-name>
+		<servlet-class>com.ssdut.java.ModifyFolderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DeleteFolderServlet</servlet-name>
+		<servlet-class>com.ssdut.java.DeleteFolderServlet</servlet-class>
+	</servlet>
 
 
 
@@ -223,5 +235,17 @@
 	<servlet-mapping>
 		<servlet-name>AddToMyPageServlet</servlet-name>
 		<url-pattern>/AddToMyPageServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteDiscussServlet</servlet-name>
+		<url-pattern>/DeleteDiscussServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyFolderServlet</servlet-name>
+		<url-pattern>/ModifyFolderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteFolderServlet</servlet-name>
+		<url-pattern>/DeleteFolderServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

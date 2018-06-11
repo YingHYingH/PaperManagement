@@ -137,7 +137,7 @@
 									Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
 											"0000");//建立连接  
 									//Statement stmt = conn.createStatement();//创建执行者  
-									String sql = "select * from discuss where user_id=" + user.getId() +" order by time desc";
+									String sql = "select * from discuss where user_id=" + user.getId() +" and flag=1 order by time desc";
 									PreparedStatement pstmt = conn.prepareStatement(sql);
 									ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
 									while (rs.next())
@@ -162,7 +162,7 @@
 									sql = "select d.*,(select count(*) from likes l where l.discuss_id = d.discuss_id),"
 											+ "(select count(*) from comment c where c.discuss_id = d.discuss_id),"
 											+ "(select count(*) from likes l where l.discuss_id = d.discuss_id and l.user_id="+user.getId()+")"
-											+ "from (select * from discuss where user_id=? order by time desc) d limit " + firstNum + "," + MaxNum;
+											+ "from (select * from discuss where user_id=? and flag=1 order by time desc) d limit " + firstNum + "," + MaxNum;
 									System.out.println(sql);
 									pstmt = conn.prepareStatement(sql);
 									pstmt.setInt(1, user.getId());
@@ -183,16 +183,16 @@
 										<td width="20% " style="word-break: break-all;" title="点击查看详情"><a
 											href="discussDetail.jsp?discuss_id=<%=rs.getInt(1)%>"><%=rs.getString(2)%></a></td>
 										<td width="10% " style="word-break: break-all;"><%=discussUsername%></td>
-										<td width="10% " style="word-break: break-all;"><%=rs.getInt(6)%></td>
+										<td width="10% " style="word-break: break-all;"><%=rs.getInt(7)%></td>
 										<td width="8% " style="word-break: break-all;"
-											class="am-hide-sm-only"><%=rs.getInt(7)%></td>
+											class="am-hide-sm-only"><%=rs.getInt(8)%></td>
 										<td width="20% " style="word-break: break-all;"
 											class="am-hide-sm-only"><%=rs.getString(4).substring(0,rs.getString(4).length()-2)%></td>
 										<td>
 											<div class="am-btn-toolbar">
 												<div class="am-btn-group am-btn-group-xs">
 													<%
-														if (rs.getInt(8) == 0) {
+														if (rs.getInt(9) == 0) {
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
@@ -203,7 +203,7 @@
 														}
 													%>
 													<%
-														if (rs.getInt(8) != 0) {
+														if (rs.getInt(9) != 0) {
 													%>
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-secondary">
@@ -225,7 +225,7 @@
 													<button
 														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
 														<span class="am-icon-trash-o"></span><a
-															href="DeleteServlet?id=<%=rs.getInt(1)%>"> 删除 
+															href=# onclick=javascript:deleteDiscuss(<%=rs.getInt(1) %>)> 删除 
 													</button>
 
 
@@ -273,6 +273,19 @@
 				var value ="user_id=" +user_id + "&discussId=" + discussId;
 				req.send(value);
 				location.reload(); 
+			}
+			function deleteDiscuss(discussId){
+        		if(confirm("您确定要删除这条帖子吗？")){
+        			//新建页面请求对象
+    				var req = new XMLHttpRequest();
+    				//设置传送方式，对应的servlet或action路径，是否异步处理
+    		        req.open("POST", "DeleteDiscussServlet", true);
+    		        //如果设置数据传送方式为post，则必须设置请求头信息
+    		        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    				var value ="discussId=" + discussId;
+    				req.send(value);
+    				location.reload(); 
+        		}
 			}
 		</script>
 

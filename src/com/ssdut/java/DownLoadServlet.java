@@ -19,7 +19,7 @@ public class DownLoadServlet extends HttpServlet {
 		int index = url.indexOf(".pdf");
 		url = url.substring(0, index+4);
 		int id = (Integer.parseInt(request.getParameter("id")));
-		System.out.println(id);
+		//System.out.println(id);
 		PaperDao dao = new PaperDao();
 		try {
 			dao.increDownloadcnt(id);

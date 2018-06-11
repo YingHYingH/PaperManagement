@@ -199,6 +199,19 @@ public class PaperDao extends AbstractDao {
 			throw new Exception("获取所有论文信息失败！" + e);
 		}
 	}
+	public void deletePaperWithFolderId(Integer folderId) throws Exception {
+		try {
+			Connection conn = helper.getConnection();
+			String sql = "update paper set flag=2 where id in (select paper_id from folder_paper where folder_id=?)";
+			QueryRunner query = new QueryRunner();
+			Object[] params = { folderId };
+			query.update(conn, sql, params);
+			DbHelper.release(conn);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("获取论文信息！" + e);
+		}
+	}
 
 	@Test
 	public void testGetPaperByUser_Id() throws Exception {
