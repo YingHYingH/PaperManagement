@@ -25,19 +25,4 @@ public class addPaperFavoritesDao extends AbstractDao {
 		}
 	}
 
-	@Test
-	public void addPaperFavoritesDaotest() throws Exception {
-		Paper paper = new Paper();
-
-		paper.setTitle("title");
-		paper.setAuthor("author");
-		paper.setDOI("DOI");
-		paper.setClassification1("classification1");
-		paper.setUser_id(4);
-		paper.setPubDate("0001/00/00");
-		new addPaperFavoritesDao().addPaperFavorites(paper);
-		paper = new PaperDao().getPaperById(1);
-
-		System.out.println(paper);
-	}
 }

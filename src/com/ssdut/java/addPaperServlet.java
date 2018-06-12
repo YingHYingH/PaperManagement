@@ -66,7 +66,6 @@ public class addPaperServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(paper);
 		session.setAttribute("id", paper.getId());
 		session.setAttribute("title", title);
 		session.setAttribute("author", author);

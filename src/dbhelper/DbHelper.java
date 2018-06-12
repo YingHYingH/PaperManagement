@@ -103,7 +103,6 @@ public class DbHelper implements DataSource {
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			connpool.add(conn);
 		}
-		System.out.println(connpool.size() + "regis");
 	}
 
 	/**
@@ -199,8 +198,6 @@ public class DbHelper implements DataSource {
 	 */
 	@Override
 	public Connection getConnection() throws SQLException {
-
-		System.out.println(connpool.size());
 		if (connpool.size() <= 0) {
 			throw new RuntimeException("数据库忙，请待会再试试吧！");
 		}

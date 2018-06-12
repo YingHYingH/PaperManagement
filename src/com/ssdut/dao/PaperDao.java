@@ -213,30 +213,4 @@ public class PaperDao extends AbstractDao {
 		}
 	}
 
-	@Test
-	public void testGetPaperByUser_Id() throws Exception {
-		PaperDao paperDao = new PaperDao();
-		Paper paper = paperDao.getPaperByUser_Id(2);
-		System.out.println(paper);
-	}
-
-	@Test
-	public void testGetAllPapers() throws Exception {
-		PaperDao paperDao = new PaperDao();
-		ArrayList<Paper> papers = paperDao.getAllPapers();
-		System.out.println(papers);
-	}
-
-	@Test
-	public void testgetPaperByAll() throws Exception {
-		PaperDao paperDao = new PaperDao();
-		Paper paper = paperDao.getPaperByAll("title", "author", 4);
-		System.out.println(paper);
-	}
-
-	@Test
-	public void testincreDownloadcnt() throws Exception {
-		int id = 40;
-		increDownloadcnt(id);
-	}
 }

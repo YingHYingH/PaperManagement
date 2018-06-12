@@ -64,22 +64,4 @@ public class pdfDao {
 		result = result.replaceFirst("(Abstract|ABSTRACT|摘要):? *", "");
 		return result;
 	}
-
-	@Test
-	public void pdfDaotest() {
-		String filePath = "E://Workspaces//PaperManagement//WebContent//upload//2018050307310146.pdf";
-		pdf(filePath);
-	}
-
-	@Test
-	public void getDOItest() {
-		String filePath = "E://Workspaces//PaperManagement//WebContent//upload//2018050307310146.pdf";
-		System.out.println(getDOI(pdf(filePath)));
-	}
-
-	@Test
-	public void getAbstracttest() {
-		String filePath = "E://Workspaces//PaperManagement//WebContent//upload//2018050307310146.pdf";
-		System.out.println(getAbstract(pdf(filePath)));
-	}
 }

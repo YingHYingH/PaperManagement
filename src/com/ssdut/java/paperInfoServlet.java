@@ -44,7 +44,6 @@ public class paperInfoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		// request.getRequestDispatcher("/login.jsp").forward(request, response);
-		// System.out.println(user.getEmail());
 
 		// 没写注册校验（唯一性校验 合法性校验）
 	}

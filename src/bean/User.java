@@ -9,6 +9,7 @@ public class User {
 	private String academicstatus;
 	private String discipline;
 	private String followed;
+	private Integer visited;
 
 	public Integer getId() {
 		return id;
@@ -42,6 +43,14 @@ public class User {
 		this.email = email;
 	}
 
+	public Integer getVisited() {
+		return visited;
+	}
+
+	public void setVisited(Integer visited) {
+		this.visited = visited;
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -52,7 +61,7 @@ public class User {
 	}
 
 	public User(Integer id, String username, String psw, String email, String intro, String academicstatus,
-			String discipline,String followed) {
+			String discipline, String followed,Integer visited) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -62,8 +71,8 @@ public class User {
 		this.academicstatus = academicstatus;
 		this.discipline = discipline;
 		this.followed = followed;
+		this.visited = visited;
 	}
-
 
 	public void setAcademicstatus(String academicstatus) {
 		this.academicstatus = academicstatus;
@@ -105,6 +114,7 @@ public class User {
 		result = prime * result + ((intro == null) ? 0 : intro.hashCode());
 		result = prime * result + ((psw == null) ? 0 : psw.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((visited == null) ? 0 : visited.hashCode());
 		return result;
 	}
 
@@ -157,17 +167,19 @@ public class User {
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
+		if (visited == null) {
+			if (other.visited != null)
+				return false;
+		} else if (!visited.equals(other.visited))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", psw=" + psw + ", email=" + email + ", intro=" + intro
-				+ ", academicstatus=" + academicstatus + ", discipline=" + discipline + ", followed=" + followed + "]";
+				+ ", academicstatus=" + academicstatus + ", discipline=" + discipline + ", followed=" + followed
+				+ ", visited=" + visited + "]";
 	}
-
-	
-	
-	
 
 }

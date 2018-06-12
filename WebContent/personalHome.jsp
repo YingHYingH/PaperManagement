@@ -6,6 +6,8 @@
 <%@ page import="com.ssdut.dao.UserDao"%>
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="com.ssdut.dao.UserDao"%>
+<%@ page import="dbhelper.DbHelper"%>
+<%@ page import="dbhelper.QueryRunner"%>
 <%
 	String username = (String) session.getAttribute("username");
 	User user = new UserDao().getUserByUsername(username);
@@ -23,6 +25,16 @@
 	String authorUsername = request.getParameter("authorUsername");
 	String allFollowUser = new UserDao().getUserById(user.getId()).getFollowed();
 	int isFollow = allFollowUser.indexOf(authorUsername);
+	int visited = new UserDao().getUserByUsername(authorUsername).getVisited();
+	visited++;
+	String sql1 = "update user set visited=? where username=?";
+	Class.forName("com.mysql.jdbc.Driver");//加载驱动  
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
+			"0000");//建立连接  
+	PreparedStatement pstmt1 = con.prepareStatement(sql1);
+	Object[] params = { visited,authorUsername };
+	QueryRunner query = new QueryRunner();
+	query.update(con, sql1, params);
 	%>
 	<div class="am-cf admin-main">
 		<jsp:include page="sidebar.jsp"></jsp:include>

@@ -117,7 +117,7 @@
 					注销</a></li>
 		</ul>
 
-		<div class="am-panel am-panel-default admin-sidebar-panel">
+		<!-- <div class="am-panel am-panel-default admin-sidebar-panel">
 			<div class="am-panel-bd">
 				<p>
 					<span class="am-icon-bookmark"></span> 公告
@@ -133,7 +133,7 @@
 				</p>
 				<p>Welcome to the Amaze UI wiki!</p>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 <!-- sidebar end -->

@@ -163,7 +163,6 @@
 											+ "(select count(*) from comment c where c.discuss_id = d.discuss_id),"
 											+ "(select count(*) from likes l where l.discuss_id = d.discuss_id and l.user_id="+user.getId()+")"
 											+ "from (select * from discuss where user_id=? and flag=1 order by time desc) d limit " + firstNum + "," + MaxNum;
-									System.out.println(sql);
 									pstmt = conn.prepareStatement(sql);
 									pstmt.setInt(1, user.getId());
 									rs = pstmt.executeQuery();//返回结果集（游标）

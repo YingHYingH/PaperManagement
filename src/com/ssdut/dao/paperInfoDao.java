@@ -22,7 +22,6 @@ public class paperInfoDao extends AbstractDao {
 			Connection conn = helper.getConnection();
 			String sql = "update paper set title=?, author=?, DOI=?, classification1=? ,classification2=? ,classification3=? ,abs=? ,pubDate=? ,notes=? where id=?";
 			QueryRunner query = new QueryRunner();
-			System.out.println(paper);
 			Object[] params = { paper.getTitle(), paper.getAuthor(), paper.getDOI(), paper.getClassification1(),
 					paper.getClassification2(), paper.getClassification3(), paper.getAbs(), paper.getPubDate(),
 					paper.getNotes(), paper.getId() };

@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="bean.User"%>
+<%@ page import="com.ssdut.dao.UserDao"%>
+<%@ page import="java.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="com.ssdut.dao.UserDao"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	String username = (String) session.getAttribute("username");
+	User user = new UserDao().getUserByUsername(username);
+	int comments=0;
+	int likes=0;
 %>
 <html>
 <head>
@@ -23,15 +32,36 @@
 						<strong class="am-text-primary am-text-lg">我的主页</strong> / <small>My Home Page</small>
 					</div>
 				</div>
+				<%
+				Class.forName("com.mysql.jdbc.Driver");//加载驱动  
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
+						"0000");//建立连接  
+				//Statement stmt = conn.createStatement();//创建执行者  
+				String sql = "select * from comment,discuss where comment.discuss_id=discuss.discuss_id and discuss.user_id=?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, user.getId());
+				ResultSet rs = pstmt.executeQuery();//返回结果集（游标）
+				while (rs.next()) {
+					//if(rs.getInt(5)!=user.getId())
+					++comments;
+				}
+				sql = "select * from likes,discuss where likes.discuss_id=discuss.discuss_id and discuss.user_id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, user.getId());
+				rs = pstmt.executeQuery();//返回结果集（游标）
+				while (rs.next()) {
+					++likes;
+				}
+				%>
 
 				<ul
 					class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
 					<li><a href="#" class="am-text-success"><span
-							class="am-icon-btn am-icon-file-text"></span><br />我的评论<br />1</a></li>
+							class="am-icon-btn am-icon-file-text"></span><br />我的评论<br /><%=comments %></a></li>
 					<li><a href="#" class="am-text-warning"><span
-							class="am-icon-btn am-icon-briefcase"></span><br />我的点赞<br />1</a></li>
+							class="am-icon-btn am-icon-briefcase"></span><br />我的点赞<br /><%=likes %></a></li>
 					<li><a href="#" class="am-text-danger"><span
-							class="am-icon-btn am-icon-recycle"></span><br />我的访客<br />1</a></li>
+							class="am-icon-btn am-icon-recycle"></span><br />我的访客<br /><%=user.getVisited()%></a></li>
 					<li><a href="#" class="am-text-secondary"><span
 							class="am-icon-btn am-icon-user-md"></span><br />我的粉丝<br />1</a></li>
 				</ul>

@@ -22,7 +22,6 @@ public class ModifyFolderServlet extends HttpServlet {
         //设置禁用缓存
         response.setHeader("Cache-control","no-cache");
 		//获取从页面传递的参数
-		//System.out.println("233");
         String title = request.getParameter("name");
         String folderId = request.getParameter("folderId");
         /*

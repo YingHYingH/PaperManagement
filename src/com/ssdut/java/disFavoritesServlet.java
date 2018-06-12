@@ -11,7 +11,6 @@ import com.ssdut.dao.disFavoritesDao;
 
 public class disFavoritesServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ffffff");
 		Integer id = (Integer.parseInt(request.getParameter("id")));
 		try {
 			boolean res = disFavoritesDao.getInstance().disFavorites(id);

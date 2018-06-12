@@ -62,20 +62,21 @@
 					<div style="padding-left:20px">
 							<span style="font-size:30px"><%=rs.getString(2) %> </span>发帖人:
 							<%
-							if(!username.equals(rs.getString(6))){
+							String name = new UserDao().getUserById(rs.getInt(5)).getUsername();
+							if(!username.equals(name)){
 							%>
-							<a href="personalHome.jsp?authorUsername=<%=rs.getString(6) %>" title="点击进入用户主页">
+							<a href="personalHome.jsp?authorUsername=<%=name %>" title="点击进入用户主页">
 							<%
 							}
 							%>
 							<%
-							if(username.equals(rs.getString(6))){
+							if(username.equals(name)){
 							%>
 							<a href="allDocuments.jsp" title="点击进入用户主页">
 							<%
 							}
 							%>
-							<%=rs.getString(6)%></a>&nbsp;发帖时间:<%=rs.getString(4).substring(0, rs.getString(4).length()-2) %>
+							<%=name%></a>&nbsp;发帖时间:<%=rs.getString(4).substring(0, rs.getString(4).length()-2) %>
 										<button type="button" class="am-btn am-btn-default" style="float:right;"
 											value="uploadindex" onclick=javascript:openUserAddDialog()>
 											<span class="am-icon-pencil-square-o"></span> 发表评论

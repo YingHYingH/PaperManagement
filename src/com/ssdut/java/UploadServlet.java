@@ -79,8 +79,6 @@ public class UploadServlet extends HttpServlet {
 					filePath = "E:\\Workspaces\\PaperManagement\\WebContent\\upload\\" + fm.getName(); // 获取文件全路径名
 					fileNewPath = "E:/Workspaces/PaperManagement/WebContent/upload/" + fNewname + "." + prefix;
 					filepdfPath = "E:\\Workspaces\\PaperManagement\\WebContent\\upload\\" + fNewname + "." + prefix;
-					// System.out.println(filePath);
-					// System.out.println(fname);
 					String fileName = "";
 					// 更新Paper url uploadDate字段
 					Calendar c = Calendar.getInstance();
@@ -145,7 +143,6 @@ public class UploadServlet extends HttpServlet {
 
 		session.setAttribute("abs", abs);
 		session.setAttribute("url", url);
-		System.out.println(url);
 		String address = "addPaper4.jsp?first=url";
 		request.getRequestDispatcher(address).forward(request, response);
 	}

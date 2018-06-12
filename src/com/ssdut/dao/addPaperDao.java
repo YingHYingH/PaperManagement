@@ -52,9 +52,7 @@ public class addPaperDao extends AbstractDao {
 	public static void addDoiAbstractTitle(String filepdfPath, String url) throws Exception {
 
 		String DOI = pdf.getDOI(pdf.pdf(filepdfPath));
-		System.out.println(DOI);
 		String Abstract = pdf.getAbstract(pdf.pdf(filepdfPath));
-		System.out.println(Abstract);
 		String title = MyTextStripper.setTitle(filepdfPath);
 		try {
 			Connection conn = helper.getConnection();
@@ -68,17 +66,6 @@ public class addPaperDao extends AbstractDao {
 			throw new Exception("修改paper！" + e);
 		}
 
-	}
-
-	@Test
-	public void addPaperDaotest() throws Exception {
-		Paper paper = new Paper();
-
-		paper.setUser_id(4);
-		new addPaperDao().addPaper(paper);
-		paper = new PaperDao().getPaperById(1);
-
-		System.out.println(paper);
 	}
 
 }

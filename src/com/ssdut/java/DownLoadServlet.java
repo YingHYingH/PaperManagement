@@ -19,7 +19,6 @@ public class DownLoadServlet extends HttpServlet {
 		int index = url.indexOf(".pdf");
 		url = url.substring(0, index+4);
 		int id = (Integer.parseInt(request.getParameter("id")));
-		//System.out.println(id);
 		PaperDao dao = new PaperDao();
 		try {
 			dao.increDownloadcnt(id);
@@ -28,7 +27,6 @@ public class DownLoadServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		// url="E:\\Workspaces\\PaperManagement\\WebContent\\upload\\201804260053365.jar";
-		// System.out.println(url);
 		/*
 		 * fileName = new String(fileName.getBytes("iso8859-1"), "UTF-8"); //
 		 * 上传的文件都是保存在/upload目录下的子目录当中 String fileSaveRootPath =

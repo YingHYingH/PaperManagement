@@ -8,7 +8,6 @@
 	String username = (String) session.getAttribute("username");
 	User user = new UserDao().getUserByUsername(username);
 	String url = (String) session.getAttribute("url");
-	System.out.println(url);
 	PaperDao dao = new PaperDao();
 	Paper paper = dao.getPaperByurl(url);
 	int user_id = user.getId();

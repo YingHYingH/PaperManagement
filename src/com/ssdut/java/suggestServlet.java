@@ -18,7 +18,6 @@ public class suggestServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int paper_id = (Integer.parseInt(request.getParameter("radioPaper_id")));
-		System.out.println(paper_id);
 		try {
 			ResultSet rs = suggestDao.getInstance().suggest(paper_id);
 			HttpSession session = request.getSession();

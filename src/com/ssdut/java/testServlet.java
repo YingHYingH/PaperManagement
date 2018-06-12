@@ -51,8 +51,6 @@ public class testServlet extends HttpServlet {
 				if (!fm.isFormField()) {
 					String fname = fm.getName(); // 获取文件名
 					String filePath = "E:\\Workspaces\\PaperManagement\\WebContent\\upload\\" + fm.getName(); // 获取文件全路径名
-					System.out.println(filePath);
-					System.out.println(fname);
 					String fileName = "";
 					// 更新Paper url uploadDate字段
 					Calendar c = Calendar.getInstance();

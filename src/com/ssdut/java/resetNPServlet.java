@@ -25,7 +25,6 @@ public class resetNPServlet extends HttpServlet {
 			user.setPsw(psw);
 			boolean res = resetNPDao.getInstance().resetNP(user);
 			//request.getRequestDispatcher("/login.jsp").forward(request, response);
-			//System.out.println(user.getEmail());
 			response.sendRedirect("login.jsp");
 		}else {
 			request.getRequestDispatcher("/registerError.jsp").forward(request, response);

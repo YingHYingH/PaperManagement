@@ -70,10 +70,4 @@ public class loginDao extends AbstractDao {
 		return pswFromSQL;
 	}
 
-	@Test
-    public void testLogin() throws Exception {
-    	loginDao loginer = new loginDao();
-    	boolean isexisted = loginer.login("YingHaYingH", "Ww18842829699");
-    	System.out.println(isexisted);
-    }
 }

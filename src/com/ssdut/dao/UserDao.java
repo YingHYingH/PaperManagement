@@ -56,29 +56,7 @@ public class UserDao extends AbstractDao {
 			// TODO: handle exception
 			throw new Exception("获取用户信息！" + e);
 		}
-	}
-
-	@Test
-	public void testGetUserById() throws Exception {
-		UserDao userDao = new UserDao();
-		User user = userDao.getUserById(5);
-		System.out.println(user);
-	}
-	
-	@Test
-	public void testGetUserByUsername() throws Exception {
-		UserDao userDao = new UserDao();
-		User user = userDao.getUserByUsername("YingHYingH");
-		System.out.println(user);
-	}
-
-	@Test
-	public void testGetAllUsers() throws Exception {
-		UserDao userDao = new UserDao();
-		ArrayList<User> users = userDao.getAllUsers();
-		System.out.println(users);
-	}
-	
+	}	
 	public void addFollowed(User user) {
 		try {
 		String followed = user.getFollowed();
