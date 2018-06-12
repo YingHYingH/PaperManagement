@@ -1,6 +1,7 @@
 package com.ssdut.dao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import bean.Comment;
@@ -29,6 +30,20 @@ public class MessageDao extends AbstractDao{
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception("新增消息！" + e);
+		}
+	}
+	
+	public void updateMessageRead(Integer messageId) throws Exception {
+		try {
+			Connection conn = helper.getConnection();
+			String sql ="update message set state=1 where message_id=?";
+			QueryRunner query = new QueryRunner();
+			Object[] params = {messageId};
+			query.update(conn, sql, params);
+			DbHelper.release(conn);
+		}catch(Exception e) {
+			// TODO: handle exception
+			throw new Exception("设置消息为已读！" + e);
 		}
 	}
 }

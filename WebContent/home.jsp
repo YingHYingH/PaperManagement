@@ -52,6 +52,19 @@
 				while (rs.next()) {
 					++likes;
 				}
+				sql = "select * from user where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, user.getId());
+				rs = pstmt.executeQuery();//返回结果集（游标）
+				String following ="";
+				while (rs.next()) {
+					following=rs.getString(10);
+				}
+				int followingUserNum =0;
+				if(!following.equals("")){
+					String followingUser[] = following.split(",");
+					followingUserNum = followingUser.length;
+				}
 				%>
 
 				<ul
@@ -63,7 +76,7 @@
 					<li><a href="#" class="am-text-danger"><span
 							class="am-icon-btn am-icon-recycle"></span><br />我的访客<br /><%=user.getVisited()%></a></li>
 					<li><a href="#" class="am-text-secondary"><span
-							class="am-icon-btn am-icon-user-md"></span><br />我的粉丝<br />1</a></li>
+							class="am-icon-btn am-icon-user-md"></span><br />我的粉丝<br /><%=followingUserNum %></a></li>
 				</ul>
 
 				<!-- <div class="am-g">
@@ -337,40 +350,124 @@
 							<div class="am-panel-bd am-collapse am-in am-cf"
 								id="collapse-panel-3">
 								<ul class="am-comments-list admin-content-comment">
-									<li class="am-comment"><a href="#"><img
-											src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96"
-											alt="" class="am-comment-avatar" width="48" height="48"></a>
-										<div class="am-comment-main">
-											<header class="am-comment-hd">
-											<div class="am-comment-meta">
-												<a href="#" class="am-comment-author">某人</a> 评论于
-												<time>2014-7-12 15:30</time>
-											</div>
-											</header>
-											<div class="am-comment-bd">
-												<p>遵循 “移动优先（Mobile First）”、“渐进增强（Progressive
-													enhancement）”的理念，可先从移动设备开始开发网站，逐步在扩展的更大屏幕的设备上，专注于最重要的内容和交互，很好。</p>
-											</div>
-										</div></li>
-
-									<li class="am-comment"><a href="#"><img
-											src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96"
-											alt="" class="am-comment-avatar" width="48" height="48"></a>
-										<div class="am-comment-main">
-											<header class="am-comment-hd">
-											<div class="am-comment-meta">
-												<a href="#" class="am-comment-author">某人</a> 评论于
-												<time>2014-7-12 15:30</time>
-											</div>
-											</header>
-											<div class="am-comment-bd">
-												<p>有效减少为兼容旧浏览器的臃肿代码；基于 CSS3
-													的交互效果，平滑、高效。AMUI专注于现代浏览器（支持HTML5），不再为过时的浏览器耗费资源，为更有价值的用户提高更好的体验。</p>
-											</div>
-										</div></li>
+								<%
+									int MaxNum = 3;//每页容纳的消息的最大数目
+									int count = 0, firstPage = 1, lastPage, firstNum, lastNum, prePage, nextPage, pageNO;
+									//firstPage表示首页，lastPage表示末页，pageNO表示第几页，
+									//firstNum表示该页的起始消息的ID，lastNum表示该页的末消息的ID，
+									//prePage表示前一页，nextPage表示后一页
+									if (request.getParameter("pageNO") == null)
+										pageNO = 0;
+									else
+										pageNO = Integer.parseInt(request.getParameter("pageNO"));
+									Class.forName("com.mysql.jdbc.Driver");//加载驱动  
+									conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/papermanagement", "root",
+											"0000");//建立连接  
+									sql = "select * from message,discuss where message.receive_username=? and message.related=discuss.discuss_id order by message.state asc,message.message_time desc";
+									pstmt = conn.prepareStatement(sql);
+									pstmt.setString(1, user.getUsername());
+									rs = pstmt.executeQuery();//返回结果集（游标）
+									while (rs.next())
+										count++;
+									lastPage = (int) Math.ceil((double) count / MaxNum);
+									if (pageNO <= 0)
+										pageNO = 1;
+									if (lastPage == 0)
+										lastPage = 1;
+									if (pageNO > lastPage)
+										pageNO = lastPage;
+									firstNum = (pageNO - 1) * MaxNum;
+									lastNum = pageNO * MaxNum-1;
+									if (pageNO == 1)
+										prePage = 1;
+									else
+										prePage = pageNO - 1;
+									if (pageNO == lastPage)
+										nextPage = pageNO;
+									else
+										nextPage = pageNO + 1;
+									sql = "select * from message,discuss where message.receive_username=? and message.related=discuss.discuss_id order by message.state asc,message.message_time desc limit "+firstNum+","+MaxNum;
+									pstmt = conn.prepareStatement(sql);
+									pstmt.setString(1, user.getUsername());
+									rs = pstmt.executeQuery();//返回结果集（游标）
+									while (rs.next()) {
+										//if(rs.getInt(5)!=user.getId())
+									%>
+										<li class="am-comment"><a href="#"><img
+												src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96"
+												alt="" class="am-comment-avatar" width="48" height="48"></a>
+											<div class="am-comment-main">
+												<header class="am-comment-hd">
+												<div class="am-comment-meta">
+												<%
+													if(!username.equals(rs.getString(3))){
+												%>
+													<a href="personalHome.jsp?authorUsername=<%=rs.getString(3) %>" title="点击进入用户主页">
+												<%
+													}
+												%>
+												<%
+													if(username.equals(rs.getString(3))){
+												%>
+													<a href="allDocuments.jsp" title="点击进入用户主页">
+												<%
+													}
+												%>	
+													<%=rs.getString(3) %></a> 评论您发表的
+													<a href=# onclick=javascript:markIsRead(<%=rs.getInt(9) %>,<%=rs.getInt(1) %>) title="点击进入详情页面"><span style="color:blue"><%=rs.getString(10) %></span></a> 于
+													<time><%=rs.getString(5).substring(0, rs.getString(5).length()-2)%></time>
+													<%if(rs.getInt(6)==1){ %><span id="isRead<%=rs.getInt(1) %>">已读</span><%}%>
+													<%if(rs.getInt(6)==0){ %><span id="isRead<%=rs.getInt(1) %>">未读</span><%}%>
+												</div>
+												</header>
+												<div class="am-comment-bd">
+													<a href=# onclick=javascript:markIsRead(<%=rs.getInt(9) %>,<%=rs.getInt(1) %>) title="点击进入详情页面"><p><%=rs.getString(7) %></p></a>
+												</div>
+											</div></li>
+								<%
+									}
+								%>
 
 								</ul>
-								<ul class="am-pagination am-fr admin-content-pagination">
+								
+								<form>
+			<table  align="center" border=0>
+				<tr>
+					<td class="am-cf">
+						共 <font color=red><%=count%></font> 条记录&nbsp
+					</td>
+					<td>
+						目前页数
+						<font color=red><%=pageNO%></font>
+					</td>
+					<td>
+						总页数
+						<font color=red><%=lastPage%></font>
+					</td>
+					<td>
+						<a href=home.jsp?pageNO=1>【第一页】</a>
+					</td>
+					<td>
+						<a href=home.jsp?pageNO=<%=prePage%>>【上一页】</a>
+					</td>
+					<td>
+						<a href=home.jsp?pageNO=<%=nextPage%>>【下一页】</a>
+					</td>
+					<td>
+						<a href=home.jsp?pageNO=<%=lastPage%>>【最后一页】</a>
+					</td>
+					<td>
+						输入页次：
+						<input type=text id=pageNum size=3 name=pageNO value=<%=pageNO %>>
+					</td>
+					<td>
+						<button onclick="surePageNO()">转到</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+								
+								<!-- <ul class="am-pagination am-fr admin-content-pagination">
 									<li class="am-disabled"><a href="#">&laquo;</a></li>
 									<li class="am-active"><a href="#">1</a></li>
 									<li><a href="#">2</a></li>
@@ -378,7 +475,7 @@
 									<li><a href="#">4</a></li>
 									<li><a href="#">5</a></li>
 									<li><a href="#">&raquo;</a></li>
-								</ul>
+								</ul> -->
 							</div>
 						</div>
 					</div>
@@ -404,7 +501,28 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
-
+	<script type="text/javascript">
+		function markIsRead(discussId,messageId){
+			var isRead = $("#isRead"+messageId).text();
+			if(isRead=="未读"){
+				//标记消息为“已读”
+        		//新建页面请求对象
+				var req = new XMLHttpRequest();
+				//设置传送方式，对应的servlet或action路径，是否异步处理
+		        req.open("POST", "MarkMessageReadServlet", true);
+		        //如果设置数据传送方式为post，则必须设置请求头信息
+		        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				var value ="messageId=" +messageId;
+				req.send(value);
+			}
+			window.location.href="discussDetail.jsp?discuss_id="+discussId;
+		}
+		
+		function surePageNO() {
+			var num = $("#pageNum").val();
+			window.location.href = "home.jsp?pageNO="+num;
+		}
+	</script>
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="js/jquery.min.js"></script>
 	<!--<![endif]-->

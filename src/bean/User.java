@@ -10,6 +10,7 @@ public class User {
 	private String discipline;
 	private String followed;
 	private Integer visited;
+	private String following;
 
 	public Integer getId() {
 		return id;
@@ -51,6 +52,14 @@ public class User {
 		this.visited = visited;
 	}
 
+	public String getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(String following) {
+		this.following = following;
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,7 +70,7 @@ public class User {
 	}
 
 	public User(Integer id, String username, String psw, String email, String intro, String academicstatus,
-			String discipline, String followed,Integer visited) {
+			String discipline, String followed,Integer visited,String following) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -72,6 +81,7 @@ public class User {
 		this.discipline = discipline;
 		this.followed = followed;
 		this.visited = visited;
+		this.following = following;
 	}
 
 	public void setAcademicstatus(String academicstatus) {
@@ -103,6 +113,13 @@ public class User {
 	}
 
 	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", psw=" + psw + ", email=" + email + ", intro=" + intro
+				+ ", academicstatus=" + academicstatus + ", discipline=" + discipline + ", followed=" + followed
+				+ ", visited=" + visited + ", following=" + following + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -110,6 +127,7 @@ public class User {
 		result = prime * result + ((discipline == null) ? 0 : discipline.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((followed == null) ? 0 : followed.hashCode());
+		result = prime * result + ((following == null) ? 0 : following.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((intro == null) ? 0 : intro.hashCode());
 		result = prime * result + ((psw == null) ? 0 : psw.hashCode());
@@ -147,6 +165,11 @@ public class User {
 				return false;
 		} else if (!followed.equals(other.followed))
 			return false;
+		if (following == null) {
+			if (other.following != null)
+				return false;
+		} else if (!following.equals(other.following))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -173,13 +196,6 @@ public class User {
 		} else if (!visited.equals(other.visited))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", psw=" + psw + ", email=" + email + ", intro=" + intro
-				+ ", academicstatus=" + academicstatus + ", discipline=" + discipline + ", followed=" + followed
-				+ ", visited=" + visited + "]";
 	}
 
 }

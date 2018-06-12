@@ -17,6 +17,12 @@
 <head>
 <jsp:include page="headerreference.jsp"></jsp:include>
 <title>PaperManagement library allDocuments</title>
+<style>
+.a {
+	float:left;
+	margin:3.5px 10px 0 -10px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -24,7 +30,15 @@
 	<%
 	String authorUsername = request.getParameter("authorUsername");
 	String allFollowUser = new UserDao().getUserById(user.getId()).getFollowed();
-	int isFollow = allFollowUser.indexOf(authorUsername);
+	String allFollowingUser = new UserDao().getUserById(user.getId()).getFollowing();
+	int isFollow=-1;
+	int isFollowing=-1;
+	if(allFollowUser!=null){
+		isFollow = allFollowUser.indexOf(authorUsername);
+	}
+	if(allFollowingUser!=null){
+		isFollowing = allFollowingUser.indexOf(authorUsername);
+	}
 	int visited = new UserDao().getUserByUsername(authorUsername).getVisited();
 	visited++;
 	String sql1 = "update user set visited=? where username=?";
@@ -51,7 +65,22 @@
 					<div class="am-u-sm-12 am-u-md-9">
 						<div class="am-btn-toolbar">
 							<div class="am-btn-group am-btn-group-xs">
-								<%
+								
+							    <%
+									if(isFollowing<0){
+								%>
+								<span class="am-icon-circle-o a">他未关注我</span>
+							    <%
+									}
+							    %>
+							    <%
+									if(isFollowing>=0){
+								%>
+								<span class="am-icon-circle a">他关注了我</span>
+							    <%
+									}
+							    %>
+							    <%
 									if(isFollow<0){
 								%>
 								<button type="button" class="am-btn am-btn-default"

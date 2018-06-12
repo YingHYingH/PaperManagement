@@ -129,7 +129,10 @@
 		<servlet-name>DeleteFolderServlet</servlet-name>
 		<servlet-class>com.ssdut.java.DeleteFolderServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>MarkMessageReadServlet</servlet-name>
+		<servlet-class>com.ssdut.java.MarkMessageReadServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
@@ -247,5 +250,9 @@
 	<servlet-mapping>
 		<servlet-name>DeleteFolderServlet</servlet-name>
 		<url-pattern>/DeleteFolderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MarkMessageReadServlet</servlet-name>
+		<url-pattern>/MarkMessageReadServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

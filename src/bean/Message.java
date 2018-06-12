@@ -10,7 +10,7 @@ public class Message {
 	private Date message_time;
 	private int state;
 	private String content;
-	private String related;
+	private int related;
 	public int getMessage_id() {
 		return message_id;
 	}
@@ -53,10 +53,10 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRelated() {
+	public int getRelated() {
 		return related;
 	}
-	public void setRelated(String related) {
+	public void setRelated(int related) {
 		this.related = related;
 	}
 	@Override
@@ -67,7 +67,7 @@ public class Message {
 		result = prime * result + message_id;
 		result = prime * result + ((message_time == null) ? 0 : message_time.hashCode());
 		result = prime * result + ((receive_username == null) ? 0 : receive_username.hashCode());
-		result = prime * result + ((related == null) ? 0 : related.hashCode());
+		result = prime * result + related;
 		result = prime * result + ((sent_username == null) ? 0 : sent_username.hashCode());
 		result = prime * result + state;
 		result = prime * result + type;
@@ -99,10 +99,7 @@ public class Message {
 				return false;
 		} else if (!receive_username.equals(other.receive_username))
 			return false;
-		if (related == null) {
-			if (other.related != null)
-				return false;
-		} else if (!related.equals(other.related))
+		if (related != other.related)
 			return false;
 		if (sent_username == null) {
 			if (other.sent_username != null)

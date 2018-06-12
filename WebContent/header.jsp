@@ -41,14 +41,14 @@
 					我的消息 <%if(i>0){ %><span class="am-badge am-badge-warning"><%=i %></span><%} %></a></li>
 			<li class="am-dropdown" data-am-dropdown><a
 				class="am-dropdown-toggle" data-am-dropdown-toggle
-				href="javascript:;"> <span class="am-icon-users"></span> 操作 <span
+				href="javascript:;"> <span class="am-icon-cogs"></span> 操作 <span
 					class="am-icon-caret-down"></span>
 			</a>
 				<ul class="am-dropdown-content">
 					<li><a href="personalInfo.jsp"><span class="am-icon-user"></span>
-							资料</a></li>
+							个人资料</a></li>
 					<!-- <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li> -->
-					<li><a href="login.jsp"><span class="am-icon-power-off"></span> 退出</a></li>
+					<li><a href="login.jsp"><span class="am-icon-sign-out"></span> 注销</a></li>
 				</ul></li>
 			<li class="am-hide-sm-only"><a href="javascript:;"
 				id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span

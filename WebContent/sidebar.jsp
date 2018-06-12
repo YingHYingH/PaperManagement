@@ -17,12 +17,12 @@
 			<li><a href="home.jsp"><span class="am-icon-home"></span> 我的主页</a></li>
 			<li class="admin-parent"><a class="am-cf"
 				data-am-collapse="{target: '#collapse-nav'}"><span
-					class="am-icon-file"></span> 个人管理 <span
+					class="am-icon-gear"></span> 个人管理 <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="collapse-nav">
 					<li><a href="personalInfo.jsp" class="am-cf"><span
-							class="am-icon-check"></span> 个人资料</a></li>
+							class="am-icon-user"></span> 个人资料</a></li>
 					<!-- <li><a href="help.jsp"><span class="am-icon-puzzle-piece"></span>
 							帮助页</a></li> -->
 					<!-- <li><a href="admin-gallery.html"><span class="am-icon-th"></span>
@@ -39,15 +39,15 @@
 
 			<li class="admin-parent"><a class="am-cf"
 				data-am-collapse="{target: '#collapse-nav1'}"><span
-					class="am-icon-file"></span> Library（库） <span
+					class="am-icon-graduation-cap"></span> Library（库） <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="collapse-nav1">
 					<li><a href="allDocuments.jsp" class="am-cf"><span
-							class="am-icon-file-text"></span> My Home Page</a></li>
+							class="am-icon-file"></span> My Home Page</a></li>
 					<li><a href="favorites.jsp"><span class="am-icon-star"></span>
 							Favorites</a></li>
-					<li><a href="recentlyAdded.jsp"><span class="am-icon-star"></span>
+					<li><a href="recentlyAdded.jsp"><span class="am-icon-file-text"></span>
 							recentlyAdded</a></li>
 				</ul></li>
 								<%
@@ -63,7 +63,7 @@
 								%>
 				<li class="admin-parent"><a class="am-cf"
 				data-am-collapse="{target: '#addFolder'}" title="新增文件夹"><span
-					class="am-icon-file"></span> Folder <span
+					class="am-icon-folder-open"></span> Folder <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="addFolder">
@@ -71,7 +71,7 @@
 					    while (rs.next()) {
 					%>
 					<li><a href="myFolders.jsp?folderId=<%=rs.getInt(1)%>" class="am-cf"><span
-							class="am-icon-file-text"></span><%=rs.getString(2)%></a></li>
+							class="am-icon-folder-open-o"></span><%=rs.getString(2)%></a></li>
 					<%
 						}
 					%>
@@ -81,12 +81,12 @@
 				
 				<li class="admin-parent"><a class="am-cf"
 				data-am-collapse="{target: '#collapse-nav2'}"><span
-					class="am-icon-file"></span> Community <span
+					class="am-icon-globe"></span> Community <span
 					class="am-icon-angle-right am-fr am-margin-right"></span></a>
 				<ul class="am-list am-collapse admin-sidebar-sub am-in"
 					id="collapse-nav2">
 					<li><a href="forumHome.jsp" class="am-cf"><span
-							class="am-icon-calendar"></span> Forum</a></li>
+							class="am-icon-group"></span> Forum</a></li>
 				</ul></li>
 				
 								<script type="text/javascript"> 
@@ -112,7 +112,7 @@
 			<!-- <li><a href="library.jsp"><span class="am-icon-table"></span>
 					Library（库）</a></li> -->
 			<li><a href="suggest.jsp"><span
-					class="am-icon-pencil-square-o"></span> Suggest（推荐）</a></li>
+					class="am-icon-file-o"></span> Suggest（推荐）</a></li>
 			<li><a href="login.jsp"><span class="am-icon-sign-out"></span>
 					注销</a></li>
 		</ul>

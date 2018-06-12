@@ -34,21 +34,31 @@ public class FollowUserServlet extends HttpServlet {
         try {
         	UserDao userDao = new UserDao(); 
         	User user = userDao.getUserById(user_id);
+        	User followingUser = userDao.getUserByUsername(authorUsername);
         	Integer isAdd = Integer.parseInt(flag);
         	String followed = user.getFollowed();
+        	String following = followingUser.getFollowing();
         	if(isAdd==1) {
         		if(followed==null) {
             		followed =authorUsername+",";
             	}else {
             		followed +=authorUsername+",";
             	}
+        		if(following==null) {
+        			following = user.getUsername()+",";
+        		}else {
+        			following += user.getUsername()+",";
+        		}
         	}else if(isAdd==0) {
 //        		int index = followed.indexOf(authorUsername);
 //        		followed = followed.substring(index, authorUsername.length()+1);
         		followed = followed.replaceFirst(authorUsername+",", "");
+        		following = following.replaceFirst(user.getUsername()+",", "");
         	}
         	user.setFollowed(followed);
         	userDao.addFollowed(user);
+        	followingUser.setFollowing(following);
+        	userDao.addFollowing(followingUser);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
