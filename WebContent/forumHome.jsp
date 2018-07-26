@@ -88,7 +88,7 @@
 
 
 
-					<form action="searchServlet" class="fh5co-form animate-box"
+					<%-- <form action="searchServlet" class="fh5co-form animate-box"
 						data-animate-effect="fadeIn" method="post">
 						<input type="hidden" name="user_id" value="<%=user.getId()%>">
 						<div class="am-u-sm-12 am-u-md-3">
@@ -97,9 +97,9 @@
 									name="searchKeyword"> <span class="am-input-group-btn">
 									<button class="am-btn am-btn-default" type="submit">搜索</button>
 								</span>
-							</div>
+							</div>	
 						</div>
-					</form>
+					</form> --%>
 				</div>
 
 

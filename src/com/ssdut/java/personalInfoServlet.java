@@ -28,7 +28,7 @@ public class personalInfoServlet extends HttpServlet {
 			user.setAcademicstatus(academicstatus);
 			user.setDiscipline(discipline);
 			user.setEmail(email);
-			user.setUsername(username);
+			//user.setUsername(username);
 			boolean res = personalInfoDao.getInstance().personalInfo(user);
 			response.sendRedirect("home.jsp");
 		} catch (Exception e) {

@@ -21,9 +21,9 @@ public class personalInfoDao extends AbstractDao {
 	public boolean personalInfo(User user) throws Exception {
 		try {
 			Connection conn = helper.getConnection();
-			String sql = "update user set username=?, email=?, academicstatus=?, discipline=? ,intro=? where id=?";
+			String sql = "update user set email=?, academicstatus=?, discipline=? ,intro=? where id=?";
 			QueryRunner query = new QueryRunner();
-			Object[] params = { user.getUsername(), user.getEmail(), user.getAcademicstatus(), user.getDiscipline(),
+			Object[] params = { user.getEmail(), user.getAcademicstatus(), user.getDiscipline(),
 					user.getIntro(), user.getId() };
 			query.update(conn, sql, params);
 			DbHelper.release(conn);

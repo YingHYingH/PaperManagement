@@ -40,8 +40,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg"><%=folderTitle %></strong> / <small>My
-							Folders</small>
+						<strong class="am-text-primary am-text-lg"><%=folderTitle %></strong> / <small>My Folders</small>
 						<span class="am-icon-pencil-square-o" onclick=javascript:modifyFolder(<%=folderId %>) title="点击修改文件夹名"></span>
 						<span class="am-icon-trash" onclick=javascript:deleteFolder(<%=folderId %>) title="删除该文件夹"></span>
 					</div>

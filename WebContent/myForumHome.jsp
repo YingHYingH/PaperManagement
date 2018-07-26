@@ -91,7 +91,7 @@
 
 
 
-					<form action="searchServlet" class="fh5co-form animate-box"
+					<%-- <form action="searchServlet" class="fh5co-form animate-box"
 						data-animate-effect="fadeIn" method="post">
 						<input type="hidden" name="user_id" value="<%=user.getId()%>">
 						<div class="am-u-sm-12 am-u-md-3">
@@ -102,7 +102,7 @@
 								</span>
 							</div>
 						</div>
-					</form>
+					</form> --%>
 				</div>
 
 

@@ -88,14 +88,14 @@
 						<input type="hidden" name="id" value="<%=user.getId()%>">
 						<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
 							<div class="am-form am-form-horizontal">
-								<div class="am-form-group">
+								<%-- <div class="am-form-group">
 									<label for="username" class="am-u-sm-3 am-form-label">用户名</label>
 									<div class="am-u-sm-9">
 										<input type="text" id="username" name="username"
 											placeholder="请设置用户名" autocomplete="off" required max
 											value="<%=username%>">
 									</div>
-								</div>
+								</div> --%>
 
 								<div class="am-form-group">
 									<label for="email" class="am-u-sm-3 am-form-label">电子邮箱</label>
